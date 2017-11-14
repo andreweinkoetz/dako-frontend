@@ -16,7 +16,9 @@ export class ChatClientService {
         .connect(URL)
         .map((response: MessageEvent): ChatPdu => {
           let data = JSON.parse(response.data);
-          this.pdu = new ChatPdu(data.userName, data.pdutype);    
+          this.pdu = new ChatPdu();    
+          this.pdu.setUserName(data.userName);
+          this.pdu.setPduType(data.pduType)
           return this.pdu;   
         });
     }
