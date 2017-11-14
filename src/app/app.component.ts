@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ChatClientService } from './chat-client.service';
 import { ChatPdu } from './chat-pdu';
+import { ClientConversationStatus } from './client-conversation-status.enum';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,11 @@ export class AppComponent {
   }
 
   sendMsg() {
-		console.log('new message from client to websocket: ', 'new string message');
-		this.clientService.messages.next();
+    console.log('new message from client to websocket: ', 'Test-Andre');
+    var pdu : ChatPdu = new ChatPdu();
+    pdu.setUserName("Test-Andre");
+    pdu.setClientStatus(ClientConversationStatus.REGISTERED);
+		this.clientService.messages.next(pdu);
   }
   
   simplefunc(){
