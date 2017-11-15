@@ -5,7 +5,7 @@ import { useAnimation } from "@angular/core/src/animation/dsl";
 export class ChatPdu {
 
     private userName: string;
-    private pdutype: Pdutype;
+    private pduType: Pdutype;
     private eventUserName: string;
     private clientThreadName: string;
     private serverThreadName: string;
@@ -22,7 +22,7 @@ export class ChatPdu {
     private errorCode: number;
 
     setPduType(pdutype: Pdutype) {
-        this.pdutype = pdutype;
+        this.pduType = pdutype;
     }
 
     setUserName(userName: string) {
@@ -157,7 +157,7 @@ export class ChatPdu {
     }
 
     getPdutype(): Pdutype {
-        return this.pdutype;
+        return this.pduType;
     }
 
     /**
@@ -398,6 +398,14 @@ export class ChatPdu {
         pdu.setClientStatus(ClientConversationStatus.REGISTERED);
         pdu.setUserName(userName);
         pdu.setEventUserName(receivedPdu.getEventUserName());
+        return pdu;
+    }
+
+    public static createLoginRequestPdu(userName: string): ChatPdu{
+        var pdu : ChatPdu = new ChatPdu();
+        pdu.setUserName(userName);
+        pdu.setClientStatus(ClientConversationStatus.REGISTERING);
+        pdu.setPduType(Pdutype.LOGIN_REQUEST);
         return pdu;
     }
 

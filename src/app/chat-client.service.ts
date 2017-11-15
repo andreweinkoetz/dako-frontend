@@ -18,7 +18,11 @@ export class ChatClientService {
           let data = JSON.parse(response.data);
           this.pdu = new ChatPdu();    
           this.pdu.setUserName(data.userName);
-          this.pdu.setPduType(data.pduType)
+          this.pdu.setPduType(data.pduType);
+          this.pdu.setClients(data.clients);
+          this.pdu.setClientStatus(data.clientstatus);
+          this.pdu.setEventUserName(data.eventUserName);
+          this.pdu.setMessage(data.message);
           return this.pdu;   
         });
     }
