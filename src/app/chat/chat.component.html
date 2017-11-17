@@ -1,0 +1,77 @@
+<style type="text/css">
+  body {
+    background-color: #DADADA;
+  }
+
+  body>.grid {
+    height: 100%;
+    max-width: 800px;
+  }
+
+  .grid{
+    overflow: hidden;
+  }
+
+  .chatBox{
+    height: 250px;
+    overflow-y: scroll;
+  }
+
+  .image {
+    margin-top: 10px;
+  }
+
+  .column {
+    max-width: 800px;
+  }
+</style>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="one column row">
+    <div class="column">
+      <img src="../../assets/img/logo.svg" class="image" width="250px">
+      <br>
+      <!-- <h2 class="ui grey image header">
+        <div class="content">
+          Chat-Applikation
+        </div>
+      </h2> -->
+
+      <div class="ui attached message">
+        <div class="header">
+          Herzlich willkommen bei Datenkommunikation!
+        </div>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      </div>
+      <div class="ui raised segments">
+
+        <div class="ui segment">
+          <h2 class="ui grey image header">
+            <div class="content">
+              Chat-Applikation
+            </div>
+          </h2>
+          <div class="ui segments">
+            <div class="ui left aligned segment">
+                <div class="chatBox" [innerHtml]="htmlToAdd"></div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <form class="ui form attached fluid segment">
+          <div class="field">
+            <div class="ui left icon action input">
+              <i class="mail outline icon"></i>
+              <input placeholder="Text Input" type="text" [(ngModel)]='message' [ngModelOptions]="{standalone: true}">
+              <button class="ui button" (click)="send()">Submit</button>
+            </div>
+          </div>
+       
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

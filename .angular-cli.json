@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../node_modules/semantic-ui-css/semantic.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -58,6 +58,8 @@
     "class": {
       "spec": false
     },
-    "component": {}
+    "component": {
+      "inlineStyle": true
+    }
   }
 }
