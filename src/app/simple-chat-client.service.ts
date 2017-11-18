@@ -7,10 +7,6 @@ import { AbstractChatClientService } from './abstract-chat-client.service';
 @Injectable()
 export class SimpleChatClientService extends AbstractChatClientService {
 
-  handleUserListEvent(receivedPdu: ChatPdu) {
-    console.log(receivedPdu.getClients());
-  }
-
   handleIncomingPdu(receivedPdu: ChatPdu) {
 
     console.log("Handling PDU Status: " + this.status);
@@ -33,7 +29,6 @@ export class SimpleChatClientService extends AbstractChatClientService {
               // Meldung vom Server, dass sich die Liste der
               // angemeldeten User erweitert hat
               this.loginEventAction(receivedPdu);
-
               break;
 
             case Pdutype.LOGOUT_EVENT:
@@ -143,11 +138,10 @@ export class SimpleChatClientService extends AbstractChatClientService {
   }
   logoutResponseAction(receivedPdu: ChatPdu) {
     this.status = ClientConversationStatus.UNREGISTERED;
-
-    // userInterface.setSessionStatisticsCounter(sharedClientData.eventCounter.longValue(),
-    //     sharedClientData.confirmCounter.longValue(), 0, 0, 0);
-
+    localStorage.clear();
+    window.location.reload();
   }
+
   loginEventAction(receivedPdu: ChatPdu) {
     this.handleUserListEvent(receivedPdu);
   }
@@ -161,14 +155,15 @@ export class SimpleChatClientService extends AbstractChatClientService {
     if (receivedPdu.getErrorCode() == 1) {
 
       // Login hat nicht funktioniert
-      console.error("Login-Response-PDU fuer Client " + receivedPdu.getUserName()
+      console.log("Login-Response-PDU fuer Client " + receivedPdu.getUserName()
         + " mit Login-Error empfangen");
       // userInterface.setErrorMessage(
       //     "Chat-Server", "Anmelden beim Server nicht erfolgreich, Benutzer "
       //         + receivedPdu.getUserName() + " vermutlich schon angemeldet",
       //     receivedPdu.getErrorCode());
       this.status = ClientConversationStatus.UNREGISTERED;
-
+      this.loginErrorEvent.next(1);
+      this.clientService.reconnect();
       // Verbindung wird gleich geschlossen
       // try {
       //   connection.close();
@@ -178,21 +173,13 @@ export class SimpleChatClientService extends AbstractChatClientService {
     } else {
       // Login hat funktioniert
       this.status = ClientConversationStatus.REGISTERED;
-
-      // userInterface.loginComplete();
+      localStorage.setItem('username',receivedPdu.getUserName());
+      this.loginErrorEvent.next(0);
+      //this.handleUserListEvent(receivedPdu);
 
       console.debug(
         "Login-Response-PDU fuer Client " + receivedPdu.getUserName() + " empfangen");
     }
   }
 
-  send(pdu: ChatPdu) {
-    this.clientService.messages.next(pdu);
-  }
-
-  loginRequest(userName: string) {
-    console.log("Sending Request...");
-    var pdu = ChatPdu.createLoginRequestPdu(userName);
-    this.send(pdu);
-  }
 }

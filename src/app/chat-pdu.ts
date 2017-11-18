@@ -160,6 +160,16 @@ export class ChatPdu {
         return this.pduType;
     }
 
+
+    public static createLogoutRequestPdu(userName : string, clientStatus : ClientConversationStatus) : ChatPdu {
+        var requestPdu : ChatPdu = new ChatPdu();
+        requestPdu.setPduType(Pdutype.LOGOUT_REQUEST);
+		requestPdu.setClientStatus(clientStatus);
+        requestPdu.setUserName(userName);
+        return requestPdu;
+    }
+
+
     /**
 	 * Erzeugen einer Logout-Event-PDU
 	 * 

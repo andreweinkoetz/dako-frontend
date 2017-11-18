@@ -24,15 +24,26 @@ export class LoginComponent implements OnInit {
     } else {
       this.client = this.clientSimple;
     }
+    this.client.loginErrorEvent$.subscribe(errorCode => {
+      this.checkLogin(errorCode);
+    })
     this.client.loginRequest(this.username);
-
-    this.clientEvent.emit(this.client);
   }
 
+  onEnter() {
+    this.login();
+  }
 
+  checkLogin(errorCode: number) {
+    if (errorCode == 0) {
+      this.clientEvent.emit(this.client);
+    } else {
+ 
+    }
+  }
 
   ngOnInit() {
-
+    
   }
 
 }

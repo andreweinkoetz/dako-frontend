@@ -27,13 +27,11 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="userName" placeholder="Username" [(ngModel)]='username'>
+              <input #userField type="text" name="userName" placeholder="Username" [(ngModel)]='username' (keyup.enter)="onEnter()">
             </div>
           </div>
-          <div (click)="login()" class="ui fluid large red submit button">Login</div>
+          <div (click)="login()" class="ui fluid large red button submit">Login</div>
         </div>
-
-        <div class="ui error message"></div>
 
         <div class="ui grey message">
           <div class="ui form">

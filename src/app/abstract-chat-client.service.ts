@@ -4,7 +4,7 @@ import { ChatPdu } from './chat-pdu';
 import { ClientConversationStatus } from './client-conversation-status.enum';
 import { ChatClientInterface } from './chat-client-interface';
 import { Pdutype } from './pdutype.enum';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export abstract class AbstractChatClientService implements ChatClientInterface {
@@ -12,12 +12,31 @@ export abstract class AbstractChatClientService implements ChatClientInterface {
   protected messageEvent = new Subject<ChatPdu>();
   messageEvent$ = this.messageEvent.asObservable();
 
+  public userListEvent = new BehaviorSubject<ChatPdu>(undefined);
+  userListEvent$ = this.userListEvent.asObservable();
+
+  protected loginErrorEvent = new Subject<number>();
+  loginErrorEvent$ = this.loginErrorEvent.asObservable();
+
   constructor(protected clientService: ChatClientService) {
     clientService.messages.subscribe(pdu => {
       console.log("Response from websocket: " + pdu.getPdutype());
-      console.table(pdu.getClients());
       this.handleIncomingPdu(pdu);
     });
+  }
+  
+  handleUserListEvent(receivedPdu: ChatPdu) {
+    this.userListEvent.next(receivedPdu);
+  }
+
+  public logout(userName: string){
+    this.status = ClientConversationStatus.UNREGISTERING;
+    var requestPdu: ChatPdu = ChatPdu.createLogoutRequestPdu(userName, this.status);
+    this.send(requestPdu);
+  }
+
+  public reconnect(){
+    this.clientService.close();
   }
 
   public tell(userName: string, message: string) {
@@ -33,8 +52,6 @@ export abstract class AbstractChatClientService implements ChatClientInterface {
 
   abstract handleIncomingPdu(receivedPdu: ChatPdu);
 
-  abstract send(pdu: ChatPdu);
-
   abstract chatMessageEventAction(receivedPdu: ChatPdu);
 
   abstract logoutResponseAction(receivedPdu: ChatPdu);
@@ -47,10 +64,17 @@ export abstract class AbstractChatClientService implements ChatClientInterface {
 
   abstract loginResponseAction(receivedPdu: ChatPdu);
 
-  abstract loginRequest(userName: string);
+  protected status: ClientConversationStatus = ClientConversationStatus.UNREGISTERED;
 
-  abstract handleUserListEvent(receivedPdu: ChatPdu);
+  send(pdu: ChatPdu) {
+    this.clientService.messages.next(pdu);
+  }
 
-  protected status: ClientConversationStatus = ClientConversationStatus.REGISTERING;
+  loginRequest(userName: string) {
+    console.log("Sending Request...");
+    this.status = ClientConversationStatus.REGISTERING;
+    var pdu = ChatPdu.createLoginRequestPdu(userName);
+    this.send(pdu);
+  }
 
 }

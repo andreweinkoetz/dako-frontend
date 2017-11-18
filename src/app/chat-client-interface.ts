@@ -12,5 +12,6 @@ export interface ChatClientInterface {
     chatMessageResponseAction(receivedPdu: ChatPdu);
     loginResponseAction(receivedPdu: ChatPdu);
     loginRequest(userName: string);
-
+    logout(userName: string);
+    tell(userName: string, message: string);
 }

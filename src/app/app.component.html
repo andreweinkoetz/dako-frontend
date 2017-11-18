@@ -1,5 +1,5 @@
 
 <div *ngIf="!loggedIn; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock><app-login (clientEvent)="receiveClientService($event)" ></app-login></ng-template>
-<ng-template #elseBlock><app-chat [client]="client"></app-chat></ng-template>
+<ng-template #elseBlock><app-chat [client]="client" (closedEvent)="receiveClosedEvent($event)"></app-chat></ng-template>
 

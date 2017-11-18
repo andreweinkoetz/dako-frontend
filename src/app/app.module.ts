@@ -27,5 +27,5 @@ import { ChatComponent } from './chat/chat.component';
 })
 
 export class AppModule {
-
+  
 }
