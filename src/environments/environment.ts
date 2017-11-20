@@ -12,5 +12,5 @@ export const isAdvancedChat : boolean = true;
 export const serverAdress : string = "localhost";
 
 export const endpoint = {
-  URL: isAdvancedChat ? 'ws://' + serverAdress + '/dako-backend/advancedchat' : 'ws://' + serverAdress + ':8080/dako-backend/simplechat'
+  URL: isAdvancedChat ? 'ws://' + serverAdress + ':8080/dako-backend/advancedchat' : 'ws://' + serverAdress + ':8080/dako-backend/simplechat'
 };
