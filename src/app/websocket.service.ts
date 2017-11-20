@@ -22,6 +22,7 @@ export class WebsocketService {
 
   public reconnect(url){
     this.subject.complete();
+    this.subject = null;
     this.connect(url);
   }
 

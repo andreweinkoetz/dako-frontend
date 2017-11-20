@@ -24,6 +24,14 @@
       </h2>
       <form class="ui large form">
         <div class="ui stacked segment">
+
+            <div *ngIf="isError" class="ui error form field">
+                <div class="ui error message">
+                  <div class="header">Fehler beim Anmelden</div>
+                  <p>Fehler beim Login aufgetreten. Fehlernummer: {{errorCode}}<br>User bereits angemeldet.</p>
+                </div>
+              </div>
+
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
@@ -37,7 +45,7 @@
           <div class="ui form">
             <div class="inline field">
               <div class="ui toggle checkbox">
-                <input type="checkbox" [checked]="useAdvChat" (change)="useAdvChat = !useAdvChat">
+                <input type="checkbox" [checked]='isAdvancedChat' disabled="true">
                 <label>Use AdvancedChat-Client</label>
               </div>
             </div>

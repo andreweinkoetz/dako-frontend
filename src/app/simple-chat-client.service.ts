@@ -136,11 +136,6 @@ export class SimpleChatClientService extends AbstractChatClientService {
     console.log(receivedPdu.getUserName() + ": " + receivedPdu.getMessage());
     this.messageEvent.next(receivedPdu);
   }
-  logoutResponseAction(receivedPdu: ChatPdu) {
-    this.status = ClientConversationStatus.UNREGISTERED;
-    localStorage.clear();
-    window.location.reload();
-  }
 
   loginEventAction(receivedPdu: ChatPdu) {
     this.handleUserListEvent(receivedPdu);

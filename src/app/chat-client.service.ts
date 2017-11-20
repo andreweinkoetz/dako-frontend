@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { WebsocketService } from './websocket.service';
 import { ChatPdu } from './chat-pdu';
-
-const URL = 'ws://localhost:8080/dako-backend/simplechat';
+import { endpoint } from '../environments/environment';
 
 @Injectable()
 export class ChatClientService {
@@ -11,8 +10,8 @@ export class ChatClientService {
   private pdu: ChatPdu;
 
     constructor(private wsService: WebsocketService) {
-      this.messages = <Subject<ChatPdu>>wsService
-        .connect(URL)
+      this.messages = <Subject<ChatPdu>> wsService
+        .connect(endpoint.URL)
         .map((response: MessageEvent): ChatPdu => {
           console.log(response.data);
           let data = JSON.parse(response.data);
@@ -33,7 +32,7 @@ export class ChatClientService {
     }
 
     public reconnect(){
-      this.wsService.reconnect(URL);
+      this.wsService.reconnect(endpoint.URL);
     }
 
 }

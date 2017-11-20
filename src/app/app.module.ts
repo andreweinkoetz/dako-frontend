@@ -11,6 +11,7 @@ import { SimpleChatClientService } from './simple-chat-client.service';
 import { AbstractChatClientService } from './abstract-chat-client.service';
 import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
+import { AdvancedChatClientService } from './advanced-chat-client.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ChatComponent } from './chat/chat.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [WebsocketService, ChatClientService, SimpleChatClientService],
+  providers: [WebsocketService, ChatClientService, SimpleChatClientService, AdvancedChatClientService],
   bootstrap: [AppComponent]
 })
 

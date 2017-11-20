@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AppModule } from './app.module';
-import { SimpleChatClientService } from './simple-chat-client.service';
 import { AbstractChatClientService } from './abstract-chat-client.service';
 
 @Component({

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AbstractChatClientService } from '../abstract-chat-client.service';
 import { SimpleChatClientService } from '../simple-chat-client.service';
+import { isAdvancedChat } from '../../environments/environment';
+import { AdvancedChatClientService } from '../advanced-chat-client.service';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +11,17 @@ import { SimpleChatClientService } from '../simple-chat-client.service';
 })
 export class LoginComponent implements OnInit {
 
-  // @Input() private simpleClient : SimpleChatClientService;
-
+  private isAdvancedChat = isAdvancedChat;
+  private isError: boolean = false;
+  private errorCode: number = 0;
   private username: string;
-  private useAdvChat: boolean = false
   private client: AbstractChatClientService;
   @Output() clientEvent = new EventEmitter<AbstractChatClientService>();
 
-  constructor(private clientSimple: SimpleChatClientService, private clientAdvanced: SimpleChatClientService) { }
+  constructor(private clientSimple: SimpleChatClientService, private clientAdvanced: AdvancedChatClientService) { }
 
   login() {
-    if (this.useAdvChat) {
+    if (isAdvancedChat) {
       this.client = this.clientAdvanced;
     } else {
       this.client = this.clientSimple;
@@ -38,7 +40,9 @@ export class LoginComponent implements OnInit {
     if (errorCode == 0) {
       this.clientEvent.emit(this.client);
     } else {
- 
+      this.isError = true;
+      this.errorCode = errorCode;
+      console.log("Fehler beim Login aufgetreten. Fehlernummer: " + errorCode);
     }
   }
 
