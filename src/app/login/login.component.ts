@@ -11,10 +11,10 @@ import { AdvancedChatClientService } from '../advanced-chat-client.service';
 })
 export class LoginComponent implements OnInit {
 
-  private isAdvancedChat = isAdvancedChat;
-  private isError: boolean = false;
-  private errorCode: number = 0;
-  private username: string;
+   isAdvancedChat = isAdvancedChat;
+   isError: boolean = false;
+   errorCode: number = 0;
+   username: string;
   private client: AbstractChatClientService;
   @Output() clientEvent = new EventEmitter<AbstractChatClientService>();
 

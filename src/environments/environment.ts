@@ -9,8 +9,8 @@ export const environment = {
 
 export const isAdvancedChat : boolean = true;
 
-export const serverAdress : string = "dako-backend.herokuapp.com";
+export const serverAdress : string = "localhost";
 
 export const endpoint = {
-  URL: isAdvancedChat ? 'wss://' + serverAdress + '/advancedchat' : 'ws://' + serverAdress + ':8080/dako-backend/simplechat'
+  URL: isAdvancedChat ? 'ws://' + serverAdress + '/dako-backend/advancedchat' : 'ws://' + serverAdress + ':8080/dako-backend/simplechat'
 };

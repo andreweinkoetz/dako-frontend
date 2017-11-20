@@ -14,9 +14,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.updateUserList(this.client.userListEvent.getValue());
   }
 
-  private messageToAdd: string = "";
-  private usersToAdd: string = "";
-  private message: string;
+   messageToAdd: string = "";
+   usersToAdd: string = "";
+   message: string;
   private messageObservable: Subscription;
   private userListObservable: Subscription;
 
