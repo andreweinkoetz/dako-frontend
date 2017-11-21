@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   addMessage(pdu: ChatPdu) {
-    this.messageToAdd = this.messageToAdd + '<i class="address book outline icon"></i>' + pdu.getEventUserName() + ": " + pdu.getMessage() + "<br>";
+    this.messageToAdd = this.messageToAdd + '<i class="user circle outline icon"></i>' + pdu.getEventUserName() + ": " + pdu.getMessage() + "<br>";
   }
 
   updateUserList(pdu: ChatPdu) {
