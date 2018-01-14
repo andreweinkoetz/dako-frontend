@@ -261,7 +261,7 @@ export class AdvancedChatClientService extends AbstractChatClientService {
     } else {
       // Login hat funktioniert
       this.status = ClientConversationStatus.REGISTERED;
-      localStorage.setItem('username', receivedPdu.getUserName());
+      sessionStorage.setItem('username', receivedPdu.getUserName());
       this.loginErrorEvent.next(0);
       console.debug(
         "Login-Response-PDU fuer Client " + receivedPdu.getUserName() + " empfangen");

@@ -11,7 +11,7 @@ export class AppComponent {
   
   title = 'DaKo-Frontend';
   private client: AbstractChatClientService;
-  loggedIn: boolean = localStorage.getItem('username') != undefined;
+  loggedIn: boolean = sessionStorage.getItem('username') != null;
   constructor() { }
 
   receiveClientService($event) {

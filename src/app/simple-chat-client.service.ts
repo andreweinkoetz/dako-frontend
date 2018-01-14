@@ -168,7 +168,7 @@ export class SimpleChatClientService extends AbstractChatClientService {
     } else {
       // Login hat funktioniert
       this.status = ClientConversationStatus.REGISTERED;
-      localStorage.setItem('username',receivedPdu.getUserName());
+      sessionStorage.setItem('username',receivedPdu.getUserName());
       this.loginErrorEvent.next(0);
       //this.handleUserListEvent(receivedPdu);
 

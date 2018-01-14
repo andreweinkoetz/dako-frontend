@@ -88,7 +88,7 @@ export abstract class AbstractChatClientService implements ChatClientInterface {
 
   logoutResponseAction(receivedPdu: ChatPdu) {
     this.status = ClientConversationStatus.UNREGISTERED;
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
   }
 

@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     if (this.client == undefined) {
-      localStorage.clear();
+      sessionStorage.clear();
       this.closedEvent.emit(true);
       window.location.reload();
     } else {
@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
 
   private getUserName(): string {
-    return localStorage.getItem('username');
+    return sessionStorage.getItem('username');
   }
 
   ngOnDestroy() {
