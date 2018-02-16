@@ -7,10 +7,13 @@ export const environment = {
   production: false
 };
 
+// Änderung der Implementierungstypen
 export const isAdvancedChat : boolean = true;
 
+// Hier kann die IP des Servers angepasst werden, falls benötigt
 export const serverAdress : string = "localhost";
 
+// Hier kann die URI des Servers angepasst werden, falls benötigt
 export const endpoint = {
   URL: isAdvancedChat ? 'ws://' + serverAdress + ':8080/dako-backend/advancedchat' : 'ws://' + serverAdress + ':8080/dako-backend/simplechat'
 };

@@ -4,6 +4,7 @@ import { ChatPdu } from './chat-pdu';
 import { ClientConversationStatus } from './client-conversation-status.enum';
 import { Pdutype } from './pdutype.enum';
 
+// Service zur Repräsentation der Funktionalität der Advanced Varianten
 @Injectable()
 export class AdvancedChatClientService extends AbstractChatClientService {
 
@@ -210,6 +211,7 @@ export class AdvancedChatClientService extends AbstractChatClientService {
     console.log("Chat-Message-Response PDU received für Client " + receivedPdu.getUserName());
   }
 
+  // Bestätigt ein eintreffende Message-Event
   private confirmChatMessageEvent(receivedPdu: ChatPdu) {
 
     var responsePdu: ChatPdu = ChatPdu.createChatMessageEventConfirm(this.userName,
@@ -222,6 +224,7 @@ export class AdvancedChatClientService extends AbstractChatClientService {
 
   }
 
+   // Bestätigt ein eintreffende Logout-Event
   private confirmLogoutEvent(receivedPdu: ChatPdu) {
 
     var responsePdu: ChatPdu = ChatPdu.createLogoutEventConfirm(this.userName,
@@ -232,6 +235,7 @@ export class AdvancedChatClientService extends AbstractChatClientService {
       + " an den Server gesendet");
   }
 
+   // Bestätigt ein eintreffende Login-Event
   private confirmLoginEvent(receivedPdu: ChatPdu) {
 
     var responsePdu: ChatPdu = ChatPdu.createLoginEventConfirm(this.userName,
@@ -244,6 +248,7 @@ export class AdvancedChatClientService extends AbstractChatClientService {
 
   }
 
+  // Verarbeitet eine eintreffende Login-Response
   loginResponseAction(receivedPdu: ChatPdu) {
     if (receivedPdu.getErrorCode() == 1) {
       // Login hat nicht funktioniert

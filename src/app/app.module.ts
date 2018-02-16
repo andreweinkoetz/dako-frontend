@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { WebsocketService } from './websocket.service';
-import { ChatClientService } from './chat-client.service';
+import { ChatService } from './chat-client.service';
 import { ChatPdu } from './chat-pdu';
 import { Pdutype } from './pdutype.enum';
 import { SimpleChatClientService } from './simple-chat-client.service';
@@ -23,10 +23,11 @@ import { AdvancedChatClientService } from './advanced-chat-client.service';
     BrowserModule,
     FormsModule
   ],
-  providers: [WebsocketService, ChatClientService, SimpleChatClientService, AdvancedChatClientService],
+  providers: [WebsocketService, ChatService, SimpleChatClientService, AdvancedChatClientService],
   bootstrap: [AppComponent]
 })
 
+// Modul zur Integration der Service-Klassen
 export class AppModule {
   
 }

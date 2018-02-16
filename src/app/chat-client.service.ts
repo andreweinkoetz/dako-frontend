@@ -4,16 +4,18 @@ import { WebsocketService } from './websocket.service';
 import { ChatPdu } from './chat-pdu';
 import { endpoint } from '../environments/environment';
 
+// Service zum Empfang und zur Umwandlung von JSON in ChatPDUs
 @Injectable()
-export class ChatClientService {
+export class ChatService {
+  // Rx-Subject 
   public messages: Subject<ChatPdu>;
+  // Geparste ChatPDU
   private pdu: ChatPdu;
 
     constructor(private wsService: WebsocketService) {
       this.messages = <Subject<ChatPdu>> wsService
         .connect(endpoint.URL)
         .map((response: MessageEvent): ChatPdu => {
-          console.log(response.data);
           let data = JSON.parse(response.data);
           this.pdu = new ChatPdu();    
           this.pdu.setUserName(data.userName);
@@ -27,10 +29,12 @@ export class ChatClientService {
         });
     }
 
+    // Beendet Verbindung
     public close(){
       this.wsService.close();
     }
 
+    // Führt Reconnect durch
     public reconnect(){
       this.wsService.reconnect(endpoint.URL);
     }
